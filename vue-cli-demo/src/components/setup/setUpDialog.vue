@@ -44,6 +44,11 @@
             }
         },
         methods: {
+            //重置输入框
+            reset(){
+                this.newPwd=null;
+                this.oldPwd=null;
+            },
             show() {
                 this.dialogVisible = true;
             },
