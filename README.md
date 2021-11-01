@@ -1,7 +1,7 @@
 # vueMS
 express.js+vue全家桶+echarts.js
 
-1.上传到github只是一部分代码，没有及时更新。
+1.上传到github的项目会不定时更新。
 
 2.后端基于express.js
 
