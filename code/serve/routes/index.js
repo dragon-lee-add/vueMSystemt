@@ -53,4 +53,18 @@ router.post('/registerUser', (req, res)=> {
           }
   })
 });
+/**
+ * 更新密码
+ */
+ router.post('/updatePwd', (req, res)=> {
+  let  {userId,passWord}=req.body;
+  const sqlStr=`update users set passWord='${passWord}'  where userId='${userId}'`
+  connection.query(sqlStr,(err,data) =>{
+          if(err){
+            throw err;
+          }else{
+            res.send(data)
+          }
+  })
+});
 module.exports = router;

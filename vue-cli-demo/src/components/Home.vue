@@ -82,7 +82,7 @@
     methods: {
       setUp() {
         this.$refs.childSetUp.show();
-        this.$refs.childSetUp.reset();
+  
       },
       loginOut() {
         window.sessionStorage.removeItem("isLogin");

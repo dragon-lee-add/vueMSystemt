@@ -82,6 +82,7 @@
                 }
                 sessionStorage.setItem('isLogin',1);//登录判断,自定义赋值
                 this.$store.dispatch('saveUserInfo', response.data[0].userId);//请求回来后，把用户信息存储到VUEX里
+                this.$store.dispatch('saveUserPwd', response.data[0].passWord);
                 //页面跳转
                 this.$router.push("/Echarts");
                 this.$message({
