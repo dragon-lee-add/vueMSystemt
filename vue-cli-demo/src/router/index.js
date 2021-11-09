@@ -7,7 +7,7 @@ const Home = () => import('@/components/Home');
 const Echarts = () => import('@/components/Echarts');
 const Login = () => import('@/components/Login');
 const Register = () => import('@/components/Register');
-
+const DataAnalysis = () => import('@/components/DataAnalysis');
 Vue.use(Router)
 
 const router = new Router({
@@ -33,7 +33,12 @@ const router = new Router({
           meta: {
              requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
           }
-        }
+        },
+        {
+          path: '/DataAnalysis',
+          name: 'DataAnalysis',
+          component: DataAnalysis,
+        },
       ]
     },
   ]

@@ -17,7 +17,7 @@
             }
         },
         created() {
-            console.log()
+            
         },
        
         mounted() {
@@ -154,6 +154,7 @@
         margin-left: 20px;
         width: 400px;
         height: 600px;
+       
     }
     #content {
         width: 800px;

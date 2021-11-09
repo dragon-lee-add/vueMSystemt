@@ -1,26 +1,26 @@
 <template>
   <div class="index">
     <el-container style="height: 500px; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu default-active="/" :default-openeds="['1']" router background-color="#545c64" text-color="#fff">
-          <el-menu-item index="" style="background:#333; font-size:22px">
+      <el-aside width="200px" style="background-color: rgb(238, 241, 246)" >
+        <el-menu default-active=""  router background-color="#545c64" text-color="#fff">
+          <el-menu-item index="Echarts" style="background:#333; font-size:22px">
             <i class="el-icon-s-help"></i>
             Vue管理系统
           </el-menu-item>
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-message"></i>系统管理</template>
-            <el-menu-item index="Echarts">数据分析</el-menu-item>
+            <el-menu-item index="DataAnalysis">数据分析</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-menu"></i>产品管理 </template>
-            <el-menu-item index="2-1"></el-menu-item>
+            <el-menu-item index="2-1">产品信息</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-setting"></i>用户管理</template>
-            <el-menu-item index="3-1"></el-menu-item>
+              <i class="el-icon-setting"></i>客户管理</template>
+            <el-menu-item index="3-1">客户信息</el-menu-item>
           </el-submenu>
           </el-submenu>
         </el-menu>
@@ -37,8 +37,12 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown">
-                <a @click="setUp()"><el-dropdown-item>设置</el-dropdown-item></a>
-                <a @click="loginOut()"><el-dropdown-item>退出登录</el-dropdown-item></a>
+                <a @click="setUp()">
+                  <el-dropdown-item>设置</el-dropdown-item>
+                </a>
+                <a @click="loginOut()">
+                  <el-dropdown-item>退出登录</el-dropdown-item>
+                </a>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -46,7 +50,7 @@
         <router-view />
       </el-container>
     </el-container>
-    
+
     <!--子组件-->
     <setUpDialog ref="childSetUp"></setUpDialog>
   </div>
@@ -61,7 +65,17 @@
     },
     data() {
       return {
-        
+        editableTabsValue: '2',
+        editableTabs: [{
+          title: 'Tab 1',
+          name: '1',
+          content: 'Tab 1 content'
+        }, {
+          title: 'Tab 2',
+          name: '2',
+          content: 'Tab 2 content'
+        }],
+        tabIndex: 2
       };
     },
     computed: {
@@ -82,7 +96,7 @@
     methods: {
       setUp() {
         this.$refs.childSetUp.show();
-  
+
       },
       loginOut() {
         window.sessionStorage.removeItem("isLogin");
