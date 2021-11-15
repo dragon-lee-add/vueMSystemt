@@ -4,9 +4,8 @@
             <div class="date">{{ nowDate }}</div>
             <div class="title">用户满意度统计</div>
         </div>
-        <diV id="box">
-
-        </diV>
+        <diV id="box"></diV>
+        <div id="box2"></div>
     </div>
 </template>
 
@@ -25,8 +24,10 @@
         },
 
         mounted() {
-            this.drawLineOne();
+
             this.currentTime();
+            this.drawLineOne();
+            this.drawLineTwo();
         },
         //定时器销毁
         beforeDestroy() {
@@ -165,28 +166,59 @@
                 option && myChart.setOption(option);
 
             },
+            drawLineTwo() {
+                var chartDom = document.getElementById('box2');
+                var myChart = echarts.init(chartDom);
+                var option;
+                option = {
+                    xAxis: {
+                        type: 'category',
+                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            data: [150, 230, 224, 218, 135, 147, 260],
+                            type: 'line'
+                        }
+                    ]
+                };
 
+                option && myChart.setOption(option);
+            }
         }
     }
 </script>
 
 <style scoped>
+    #box2{
+        display: inline-block;
+        width: 60%;
+        height: 100%;
+        margin-left: 60px;
+    }
+
     #box {
-        width: 400px;
+        width: 30%;
         height: 100%;
         margin: 50px 10px 5px 10px;
         background-color: #e7e5e1;
         box-shadow: 10px 10px 5px #8d8989;
         border-radius: 5%;
+        display: inline-block;
     }
 
     #content {
         width: 100%;
         height: 70%;
     }
-   .boxHeader{
-       margin-top: 10px;
-   }
+
+    .boxHeader {
+        margin-top: 10px;
+    }
+
     .boxHeader .title {
         text-align: center;
         font-weight: bold;
@@ -195,8 +227,9 @@
         position: absolute;
         top: 10;
         left: 50%;
-    
+
     }
+
     .boxHeader .date {
         font-weight: bold;
         font-size: 20px;
