@@ -159,6 +159,6 @@
     #content {
         width: 800px;
         height: 600px;
-        margin-left: 600px;
+        margin-left: 480px;
     }
 </style>
