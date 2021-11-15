@@ -11,7 +11,7 @@
                         <el-input v-model="formLabelAlign.oldPwd" type="password"></el-input>
                     </el-form-item>
                     <el-form-item label="新密码:" prop="newPwd">
-                        <el-input v-model="formLabelAlign.newPwd"  type="password"></el-input>
+                        <el-input v-model="formLabelAlign.newPwd" type="password"></el-input>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -55,18 +55,21 @@
                 return this.$store.getters.getName;
             },
             ...mapState({
-                getName:state=>state.user
+                getName: state => state.user
             })
+        },
+        mounted() {
+         
         },
         methods: {
             upataPwd(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         if (this.formLabelAlign.oldPwd == this.$store.getters.getPwd) {
-                            let _this=this;
-                            this.axios.post('/api/updatePwd',{
-                                    userId:_this.getName.user,
-                                    passWord:_this.formLabelAlign.newPwd
+                            let _this = this;
+                            this.axios.post('/api/updatePwd', {
+                                userId: _this.getName.user,
+                                passWord: _this.formLabelAlign.newPwd
                             }).then(res => {
                                 this.$notify({
                                     title: '提示',
