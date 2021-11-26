@@ -20,7 +20,7 @@
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-setting"></i>客户管理</template>
-            <el-menu-item index="3-1">客户信息</el-menu-item>
+            <el-menu-item index="clientList">客户信息</el-menu-item>
           </el-submenu>
           </el-submenu>
         </el-menu>
