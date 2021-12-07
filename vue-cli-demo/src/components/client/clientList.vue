@@ -39,7 +39,7 @@
         <el-row class="list-card">
             <el-col :span="24">
                 <el-card>
-                    <el-table :data="tableData" style="width: 100%" max-height="400">
+                    <el-table :data="pageList" style="width: 100%" max-height="400">
                         <el-table-column type="selection" width="55">
                         </el-table-column>
                         <el-table-column fixed prop="date" label="日期" width="150">
@@ -68,6 +68,14 @@
                             </template>
                         </el-table-column>
                     </el-table>
+
+                    <!--分页-->
+                    <diV style="float: right;margin: 10px;">
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                            :current-page="currentPage" :page-size="pageSize" :page-sizes="[10, 20, 30, 40]"
+                            layout="total, sizes, prev, pager, next, jumper" :total="this.tableData.length">
+                        </el-pagination>
+                    </diV>
                 </el-card>
             </el-col>
         </el-row>
@@ -80,6 +88,9 @@
         data() {
             return {
                 input: "",
+                currentPage: 1,
+                pageSize: 4,
+                pageList: [],//分页数组
                 tableData: [{
                     date: '2016-05-03',
                     name: '王小虎',
@@ -111,10 +122,34 @@
                     city: '普陀区',
                     address: '上海市普陀区金沙江路 1518 弄',
                     zip: 200333
-                },
+                }
                 ]
             }
-        }
+        },
+        mounted() {
+            this.currentChangePage(this.tableData, 1);
+        },
+        methods: {
+            //分页
+            handleSizeChange: function (pageSize) { // 每页条数切换
+                this.pageSize = pageSize
+                this.handleCurrentChange1(this.currentPage1);
+            },
+            handleCurrentChange: function (currentPage) {//页码切换
+                this.currentPage1 = currentPage
+                this.currentChangePage(this.tableData, currentPage)
+            },
+            currentChangePage(list, currentPage) {
+                let from = (currentPage - 1) * this.pageSize;
+                let to = currentPage * this.pageSize;
+                this.pageList = [];
+                for (; from < to; from++) {
+                    if (list[from]) {
+                        this.pageList.push(list[from]);
+                    }
+                }
+            }
+        },
     }
 
 </script>
