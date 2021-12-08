@@ -1,27 +1,33 @@
 <template>
   <div class="login">
-    <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
-      <h1 class="title">
-        <i class="el-icon-s-promotion"></i>
-        用户登录
-      </h1>
-      <el-form-item label="账 号" prop="userId">
-        <el-input type="text" v-model="loginForm.userId" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="密 码" prop="passWord">
-        <el-input type="password" v-model="loginForm.passWord" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item prop="rememberPwd">
-        <div class="remberBox">
-          <el-checkbox v-model="loginForm.remember" />
-          记住密码
-        </div>
-      </el-form-item>
-      <el-form-item class="box">
-        <el-button type="primary" @click="submitForm('loginForm')">登录</el-button>
-        <el-button type="primary" @click="registerBtn()">注册</el-button>
-      </el-form-item>
-    </el-form>
+    <!--左侧-->
+    <div class="left">
+      <el-image :src="url"></el-image>
+    </div>
+    <!--分界线-->
+    <el-divider direction="vertical"></el-divider>
+    <!--右侧-->
+    <div class="right">
+      <h3>登&nbsp;&nbsp;&nbsp;录</h3>
+      <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
+        <el-form-item label="账 号" prop="userId">
+          <el-input type="text" v-model="loginForm.userId" autocomplete="off" placeholder="学号/电话"></el-input>
+        </el-form-item>
+        <el-form-item label="密 码" prop="passWord">
+          <el-input type="password" v-model="loginForm.passWord" autocomplete="off" placeholder="默认身份证后六位"></el-input>
+        </el-form-item>
+        <el-form-item prop="rememberPwd">
+          <div class="remberBox">
+            <el-checkbox v-model="loginForm.remember" />
+            记住密码
+          </div>
+        </el-form-item>
+        <el-form-item class="box">
+          <el-button type="primary" @click="submitForm('loginForm')" size="small ">登录</el-button>
+          <el-button type="primary" @click="registerBtn()" size="small">注册</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -31,6 +37,7 @@
     name: 'Login',
     data() {
       return {
+        url: 'http://localhost:8888/image/logo.jfif',
         loginForm: {
           userId: '',
           passWord: '',
@@ -75,12 +82,12 @@
               passWord: _this.loginForm.passWord
             }).then(response => {
               if (response.data.length) {
-               
+
                 if (this.loginForm.remember == true) {
                   sessionStorage.setItem("userId", this.loginForm.userId);
                   sessionStorage.setItem("passWord", this.loginForm.passWord);
                 }
-                sessionStorage.setItem('isLogin',1);//登录判断,自定义赋值
+                sessionStorage.setItem('isLogin', 1);//登录判断,自定义赋值
                 this.$store.dispatch('saveUserInfo', response.data[0].userId);//请求回来后，把用户信息存储到VUEX里
                 this.$store.dispatch('saveUserPwd', response.data[0].passWord);
                 //页面跳转
@@ -115,6 +122,34 @@
     line-height: 5px;
   }
 
+  /deep/ .el-form-item__label {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .el-divider {
+    background-color: rgb(180, 174, 174);
+    margin-left: 120px;
+  }
+
+  .el-divider--vertical {
+    height: 17em;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  .el-image {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: 8px;
+    border-radius: 45px;
+  }
+
   .login {
     position: absolute;
     top: 50%;
@@ -124,32 +159,30 @@
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  }
-
-  .el-form {
-    width: 400px;
-
-    border-radius: 9px;
+    width: 450px;
+    border-radius: 15px;
     padding: 3px 3px;
     box-shadow: 5px 5px 5px #e2dede;
     background-color: rgb(169, 243, 243);
   }
 
-  .el-form,
-  .title {
-    font-size: 30px;
+
+  .el-form {
+    font-size: 25px;
     font-weight: bold;
-    text-align: center;
-    padding-bottom: 20px;
   }
 
-  .el-form,
   .box {
-    padding-right: 55px;
-    line-height: 10px;
+    display: inline;
   }
 
   .remberBox {
     float: left;
+  }
+
+  .right {
+    width: 300px;
+    float: right;
+    margin: 0px 20px 25px 0px
   }
 </style>

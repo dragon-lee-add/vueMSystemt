@@ -20,9 +20,11 @@
       </el-form-item>
       <el-form-item class="box">
         <el-button type="primary" @click="submitForm('loginForm')">注册</el-button>
-        <el-button @click="resetForm('loginForm')">重置</el-button>
+        <el-button @click="returnLogin()">返回</el-button>
       </el-form-item>
+
     </el-form>
+   
   </div>
 </template>
 
@@ -125,8 +127,11 @@
           }
         });
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+      // resetForm(formName) {
+      //   this.$refs[formName].resetFields();
+      // }
+      returnLogin(){
+        this.$router.push('/')
       }
     }
   }
@@ -159,10 +164,11 @@
 
   .el-form,
   .title {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
+    margin-left: 50px;
   }
 
   .el-form,

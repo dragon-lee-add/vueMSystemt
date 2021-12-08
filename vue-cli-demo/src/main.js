@@ -9,6 +9,7 @@ import store from './vuex/store'
 import * as echarts from 'echarts';
 import axios from 'axios'
 import SIdentify from './components/identify' //注意引入路径
+
 Vue.use(SIdentify)
 Vue.prototype.axios=axios;
 Vue.prototype.$echarts = echarts
