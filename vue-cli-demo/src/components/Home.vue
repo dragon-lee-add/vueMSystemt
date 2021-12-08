@@ -1,8 +1,8 @@
 <template>
   <div class="index">
     <el-container style="height: 500px; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)" >
-        <el-menu default-active=""  router background-color="#545c64" text-color="#fff">
+      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+        <el-menu default-active="" router background-color="#545c64" text-color="#fff">
           <el-menu-item index="Echarts" style="background:#333; font-size:22px">
             <i class="el-icon-s-help"></i>
             Vue管理系统
@@ -14,13 +14,13 @@
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
-              <i class="el-icon-menu"></i>产品管理 </template>
-            <el-menu-item index="2-1">产品信息</el-menu-item>
+              <i class="el-icon-menu"></i>教师管理 </template>
+            <el-menu-item index="2-1">教师信息</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-setting"></i>客户管理</template>
-            <el-menu-item index="clientList">客户信息</el-menu-item>
+              <i class="el-icon-setting"></i>学生管理</template>
+            <el-menu-item index="clientList">学生信息</el-menu-item>
           </el-submenu>
           </el-submenu>
         </el-menu>
@@ -84,14 +84,14 @@
       }
     },
     mounted() {
-         //在页面加载时读取sessionStorage里的状态信息
-         if (sessionStorage.getItem("store")) {
-                this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("store"))))
-            }
-            //在页面刷新时将vuex里的信息保存到sessionStorage里
-            window.addEventListener("beforeunload", () => {
-                sessionStorage.setItem("store", JSON.stringify(this.$store.state))
-            })
+      //在页面加载时读取sessionStorage里的状态信息
+      if (sessionStorage.getItem("store")) {
+        this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("store"))))
+      }
+      //在页面刷新时将vuex里的信息保存到sessionStorage里
+      window.addEventListener("beforeunload", () => {
+        sessionStorage.setItem("store", JSON.stringify(this.$store.state))
+      })
     },
     methods: {
       setUp() {

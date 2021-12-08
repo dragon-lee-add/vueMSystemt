@@ -4,8 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//引用
 var indexRouter = require('./routes/index');
-
+var studentRouter = require('./routes/student');
 
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -19,9 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-
+//赋予路径
 app.use('/', indexRouter);
-
+app.use('/student', studentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
