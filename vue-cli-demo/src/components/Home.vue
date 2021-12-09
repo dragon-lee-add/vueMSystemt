@@ -58,8 +58,8 @@
           
           <!-- 其他操作按钮 -->
           <div class="tags-close-box">
-            <el-dropdown @command="handleTags">
-              <el-button size="mini">
+            <el-dropdown @command="handleTags" >
+              <el-button style=" height: 40px;">
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu size="small" slot="dropdown">
@@ -280,13 +280,15 @@
   }
 
   .tags-close-box {
-    position: fixed;
-    right: 10px;
+    
+    position: absolute;
+    right: 11px;
     top: 50px;
     box-sizing: border-box;
-    padding-top: 18px;
+    padding-top: 15px;
     text-align: center;
-    z-index: 10;
+ 
+   
 
   }
 </style>
