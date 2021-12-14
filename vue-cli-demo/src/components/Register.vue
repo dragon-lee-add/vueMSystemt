@@ -5,7 +5,7 @@
     <div class="login">
       <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
         <h1 class="title">
-          用户注册
+          管理员注册
         </h1>
         <el-form-item label="账 号" prop="userId">
           <el-input type="text" v-model="loginForm.userId" autocomplete="off"></el-input>

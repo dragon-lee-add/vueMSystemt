@@ -3,7 +3,7 @@
         <el-card class="box-card">
             <el-form :inline="true" label-width="128px" class="form">
                 <el-col :span="8">
-                    <el-form-item label="学号" prop="">
+                    <el-form-item label="会员号" prop="">
                         <el-input v-model="input" placeholder="请输入内容"></el-input>
                     </el-form-item>
                 </el-col>
@@ -13,11 +13,11 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
-                    <el-form-item label="学院" prop="">
+                    <el-form-item label="电话" prop="">
                         <el-input></el-input>
                     </el-form-item>
                 </el-col>
-                <el-form-item label="日期">
+                <el-form-item label="注册日期">
                     <el-col :span="10">
                         <el-date-picker type="date" placeholder="选择日期" style="width: 100%;" format="yyyy-MM-dd"
                             value-format="yyyy-MM-dd"></el-date-picker>
@@ -39,24 +39,27 @@
         <el-row class="list-card">
             <el-col :span="24">
                 <el-card>
-                    <el-table :data="pageList" style="width: 100%" max-height="400">
+                    <el-button type="primary" size="mini" round style="margin-bottom: 6px;" @click="Registration()">
+                        会员登记
+                    </el-button>
+                    <el-table :data="pageList" style="width: 100%"  border  stripe max-height="400">
                         <el-table-column type="selection" width="55">
                         </el-table-column>
-                        <el-table-column fixed prop="stuName" label="姓名" width="120">
+                        <el-table-column fixed prop="memberName" label="姓名" width="120">
                         </el-table-column>
-                        <el-table-column prop="stuNum" label="学号" width="140">
+                        <el-table-column prop="memberNum" label="会员号" width="140">
                         </el-table-column>
-                        <el-table-column prop="stuSex" label="性别" width="100">
+                        <el-table-column prop="memberSex" label="性别" width="100">
                         </el-table-column>
-                        <el-table-column prop="stuAge" label="年龄" width="100">
+                        <el-table-column prop="memberAge" label="年龄" width="100">
                         </el-table-column>
-                        <el-table-column  prop="date" label="入学日期" width="150">
+                        <el-table-column  prop="date" label="注册日期" width="180">
                         </el-table-column>
-                        <el-table-column prop="class" label="所属班级" width="120">
+                        <el-table-column prop="phone" label="电话号码" width="120">
                         </el-table-column>
-                        <el-table-column prop="college" label="所属学院" width="160">
+                        <el-table-column prop="status" label="审核状态" width="120">
                         </el-table-column>
-                        <el-table-column prop="stuAddr" label="住址" width="200">
+                        <el-table-column prop="memberAddr" label="住址" width="200">
                         </el-table-column>
                         <el-table-column fixed="right" label="操作" width="320">
                             <template slot-scope="scope">
@@ -64,7 +67,7 @@
                                     移除
                                 </el-button>
                                 <el-button type="primary" size="medium">
-                                    修改
+                                    审核
                                 </el-button>
                                 <el-button type="info" size="medium">
                                     查看
@@ -83,12 +86,19 @@
                 </el-card>
             </el-col>
         </el-row>
+
+        <!--子组件-->
+        <Registration ref="RegistrationChild"></Registration>
     </div>
 </template>
 
 <script>
+    import Registration from '../member/Registration'
     export default {
-        name: 'studentList',
+        name: 'memberList',
+        components:{
+            Registration
+        },
         data() {
             return {
                 input: "",
@@ -105,8 +115,11 @@
 
         },
         methods: {
+            Registration(){
+                this.$refs.RegistrationChild.dialogVisible=true
+            },
             getList() {
-                this.axios.post('/api/student/list', {}).then(res => {
+                this.axios.post('/api/member/list', {}).then(res => {
                     this.tableData = res.data
                     this.currentChangePage(this.tableData, 1);
                 })

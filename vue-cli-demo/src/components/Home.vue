@@ -5,22 +5,22 @@
         <el-menu default-active="" router background-color="#545c64" text-color="#fff">
           <el-menu-item index="Echarts" style="background:#333; font-size:22px">
             <i class="el-icon-s-help"></i>
-            Vue管理系统
+            会员管理系统
           </el-menu-item>
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-message"></i>系统管理</template>
             <el-menu-item index="DataAnalysis">数据分析</el-menu-item>
           </el-submenu>
-          <el-submenu index="2">
+          <!-- <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-menu"></i>教师管理 </template>
             <el-menu-item index="2-1">教师信息</el-menu-item>
-          </el-submenu>
+          </el-submenu> -->
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-setting"></i>班级管理</template>
-            <el-menu-item index="studentList">学生信息</el-menu-item>
+              <i class="el-icon-setting"></i>会员管理</template>
+            <el-menu-item index="memberList">会员信息</el-menu-item>
           </el-submenu>
           </el-submenu>
         </el-menu>
@@ -49,12 +49,12 @@
         </el-header>
 
         <el-card class="box-card" v-if="showTags">
-            <span class="tags-li" v-for="(item,index) in tagsList" :class="{'active': isActive(item.path)}" :key="index">
-              <router-link :to="item.path" class="tags-li-title">
-                {{item.name}}
-              </router-link>
-              <span class="tags-li-icon" @click="closeTags(index)"><i class="el-icon-close"></i></span>
-            </span>
+          <span class="tags-li" v-for="(item,index) in tagsList" :class="{'active': isActive(item.path)}" :key="index">
+            <router-link :to="item.path" class="tags-li-title">
+              {{item.name}}
+            </router-link>
+            <span class="tags-li-icon" @click="closeTags(index)"><i class="el-icon-close"></i></span>
+          </span>
           <!-- 其他操作按钮 -->
           <!-- <div class="tags-close-box">
             <el-dropdown @command="handleTags" >
@@ -228,7 +228,8 @@
   .box-card {
     height: 40px;
     display: flex;
-    align-items:center;;
+    align-items: center;
+    ;
   }
 
 
@@ -275,5 +276,4 @@
   .tags-li.active .tags-li-title {
     color: #fff;
   }
-
 </style>

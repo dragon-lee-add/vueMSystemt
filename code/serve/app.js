@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 //引用
 var indexRouter = require('./routes/index');
-var studentRouter = require('./routes/student');
+var memberRouter = require('./routes/member');
 
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 //赋予路径
 app.use('/', indexRouter);
-app.use('/student', studentRouter);
+app.use('/member', memberRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -13,7 +13,7 @@
         <el-divider direction="vertical">ssdss</el-divider>
         <!--右侧-->
         <div class="right">
-          <h3>用户登录</h3>
+          <h3>管理员登录</h3>
           <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px"
             class="demo-loginForm">
             <el-form-item label="账 号" prop="userId">
