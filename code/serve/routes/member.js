@@ -20,9 +20,9 @@ router.post('/list', (req, res) => {
 });
 //会员登记
 router.post('/addMember', function (req, res) {
-  const sqlStr = 'insert into member(memberName,memberSex,memberAge,phone,memberNum,memberAddr) values (?,?,?,?,?,?)';
+  const sqlStr = 'insert into member(memberName,memberSex,memberAge,phone,memberNum,memberAddr,date,status) values (?,?,?,?,?,?,?,?)';
   var params = req.body
-  connection.query(sqlStr, [params.memberName, params.memberSex, params.memberAge, params.phone, params.memberNum, params.memberAddr], (err, data) => {
+  connection.query(sqlStr, [params.memberName, params.memberSex, params.memberAge, params.phone, params.memberNum, params.memberAddr, params.date, params.status], (err, data) => {
     if (err) {
       throw err;
     } else {
@@ -30,6 +30,17 @@ router.post('/addMember', function (req, res) {
     }
   })
 });
-
+//删除
+router.get('/Delmember', function (req, res) {
+  let memberId = req.query.memberId;
+  const sqlStr = `delete  from member where  memberId=${memberId}`;
+  connection.query(sqlStr, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(data)
+    }
+  })
+});
 
 module.exports = router;

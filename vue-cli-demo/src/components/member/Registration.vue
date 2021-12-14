@@ -41,10 +41,28 @@
                     </el-col>
                 </el-row>
 
+                <el-row :gutter="10">
+                    <el-col :span="12">
+                        <el-form-item label="注册日期" prop="date">
+                            <el-date-picker v-model="form.date" type="date" placeholder="选择日期" style="width: 100%;"
+                                format="yyyy-MM-dd" value-format="yyyy-MM-dd"></el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="状态" prop="status">
+                            <el-select v-model="form.status" placeholder="请选择状态">
+                                <el-option label="未审核" value="1"></el-option>
+                                <el-option label="审核通过" value="2"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+
                 <el-row>
                     <el-col :span="24">
                         <div style="text-align: center;">
-                            <el-button type="primary" @click="addMember()">登记</el-button>
+                            <el-button type="primary" @click="addMember('form')">登记</el-button>
                             <el-button @click="resetForm('form')">取消</el-button>
                         </div>
                     </el-col>
@@ -66,7 +84,9 @@
                     memberAge: "",
                     phone: "",
                     memberNum: "",
-                    memberAddr: ""
+                    memberAddr: "",
+                    date: '',
+                    status: ""
                 },
                 rules: {
                     memberName: [
@@ -87,7 +107,10 @@
                     ],
                     memberAddr: [
                         { required: true, message: '请输入地址', trigger: 'blur' }
-                    ]
+                    ],
+                    date: [
+                        { required: true, message: '请选择注册时间', trigger: 'change' }
+                    ],
                 }
             }
         },
@@ -95,7 +118,7 @@
 
         },
         methods: {
-            addMember() {
+            addMember(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.axios.post('/api/member/addMember', {
@@ -104,10 +127,16 @@
                             memberAge: this.form.memberAge,
                             phone: this.form.phone,
                             memberNum: this.form.memberNum,
-                            memberAddr: this.form.memberAddr
+                            memberAddr: this.form.memberAddr,
+                            date: this.form.date,
+                            staus: this.form.status
                         }).then(res => {
                             this.dialogVisible = false
                             this.$parent.getList();
+                            this.$message({
+                                message: '登记成功',
+                                type: 'success'
+                            });
                         })
                     } else {
                         return false;

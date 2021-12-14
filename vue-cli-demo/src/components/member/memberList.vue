@@ -42,7 +42,7 @@
                     <el-button type="primary" size="mini" round style="margin-bottom: 6px;" @click="Registration()">
                         会员登记
                     </el-button>
-                    <el-table :data="pageList" style="width: 100%"  border  stripe max-height="400">
+                    <el-table :data="pageList" style="width: 100%" border stripe max-height="400">
                         <el-table-column type="selection" width="55">
                         </el-table-column>
                         <el-table-column fixed prop="memberName" label="姓名" width="120">
@@ -53,7 +53,7 @@
                         </el-table-column>
                         <el-table-column prop="memberAge" label="年龄" width="100">
                         </el-table-column>
-                        <el-table-column  prop="date" label="注册日期" width="180">
+                        <el-table-column prop="date" label="注册日期" width="180">
                         </el-table-column>
                         <el-table-column prop="phone" label="电话号码" width="120">
                         </el-table-column>
@@ -63,7 +63,7 @@
                         </el-table-column>
                         <el-table-column fixed="right" label="操作" width="320">
                             <template slot-scope="scope">
-                                <el-button type="warning" size="medium">
+                                <el-button type="warning" size="medium" @click="delMember(scope.row)">
                                     移除
                                 </el-button>
                                 <el-button type="primary" size="medium">
@@ -96,7 +96,7 @@
     import Registration from '../member/Registration'
     export default {
         name: 'memberList',
-        components:{
+        components: {
             Registration
         },
         data() {
@@ -105,23 +105,53 @@
                 currentPage: 1,
                 pageSize: 4,
                 pageList: [],//分页数组
-                tableData: []
+                tableData: [],
+                ids: []
             }
         },
         created() {
             this.getList()
+
         },
         mounted() {
 
         },
         methods: {
-            Registration(){
-                this.$refs.RegistrationChild.dialogVisible=true
+            delMember(row) {
+                const id = row.memberId || this.ids
+                this.$confirm('此操作将永久删除该, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.axios.get('/api/member/Delmember', {
+                        params: {
+                            memberId: id
+                        }
+                    }).then(res => {
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        this.getList()
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+
+
+            },
+            Registration() {
+                this.$refs.RegistrationChild.dialogVisible = true
             },
             getList() {
                 this.axios.post('/api/member/list', {}).then(res => {
                     this.tableData = res.data
                     this.currentChangePage(this.tableData, 1);
+
                 })
             },
             //分页
