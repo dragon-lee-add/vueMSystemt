@@ -1,30 +1,31 @@
 <template>
-  <div class="login">
-    <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
-      <h1 class="title">
-        <i class="el-icon-s-promotion"></i>
-        用户注册
-      </h1>
-      <el-form-item label="账 号" prop="userId">
-        <el-input type="text" v-model="loginForm.userId" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="密 码" prop="passWord">
-        <el-input type="password" v-model="loginForm.passWord" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="验证码" prop="sidentify">
-        <el-input v-model="loginForm.sidentify" style="width: 50%;float: left;" autocomplete="off"
-          placeholder="请输入右侧验证码" />
-        <div class="coderight" @click="refreshCode">
-          <SIdentify :identifyCode="identifyCode"></SIdentify>
-        </div>
-      </el-form-item>
-      <el-form-item class="box">
-        <el-button type="primary" @click="submitForm('loginForm')">注册</el-button>
-        <el-button @click="returnLogin()">返回</el-button>
-      </el-form-item>
-
-    </el-form>
-   
+  <div>
+    <!--背景图片-->
+    <img :src="image" class="background"></img>
+    <div class="login">
+      <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
+        <h1 class="title">
+          用户注册
+        </h1>
+        <el-form-item label="账 号" prop="userId">
+          <el-input type="text" v-model="loginForm.userId" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密 码" prop="passWord">
+          <el-input type="password" v-model="loginForm.passWord" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="验证码" prop="sidentify">
+          <el-input v-model="loginForm.sidentify" style="width: 50%;float: left;" autocomplete="off"
+            placeholder="请输入右侧验证码" />
+          <div class="coderight" @click="refreshCode">
+            <SIdentify :identifyCode="identifyCode"></SIdentify>
+          </div>
+        </el-form-item>
+        <el-form-item class="box">
+          <el-button type="primary" @click="submitForm('loginForm')">注册</el-button>
+          <el-button @click="returnLogin()">返回</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -47,6 +48,7 @@
       return {
         identifyCodes: '1234567890ABCDEFGHIGKLMNoPQRSTUVWXYZ',
         identifyCode: '', //验证码
+        image: 'http://localhost:8888/image/background.jpeg',
         loginForm: {
           userId: '',
           passWord: '',
@@ -72,9 +74,6 @@
     mounted() {
       this.identifyCode = "";
       this.makeCode(this.identifyCodes, 4);
-    },
-    created() {
-
     },
     methods: {
       // 生成随机数
@@ -118,10 +117,10 @@
               }
             }).then(res => {
               console.log(res.status)
-              if(res.data.length){
+              if (res.data.length) {
                 this.$message.error('用户已经注册');
-              }else{
-              _this.register();
+              } else {
+                _this.register();
               }
             })
           }
@@ -130,7 +129,7 @@
       // resetForm(formName) {
       //   this.$refs[formName].resetFields();
       // }
-      returnLogin(){
+      returnLogin() {
         this.$router.push('/')
       }
     }
@@ -141,6 +140,14 @@
 <style scoped>
   /deep/ .el-form-item__content {
     line-height: 5px;
+  }
+
+  .background {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    position: fixed;
+    z-index: -1;
   }
 
   .login {
@@ -156,10 +163,10 @@
 
   .el-form {
     width: 400px;
-    border-radius: 9px;
+    border-radius: 15px;
     padding: 3px 3px;
-    box-shadow: 5px 5px 5px #e2dede;
-    background-color: rgb(169, 243, 243);
+    box-shadow: 5px 5px 5px #aeccee;
+    background-color: rgb(246, 250, 250);
   }
 
   .el-form,

@@ -19,8 +19,8 @@
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-setting"></i>学生管理</template>
-            <el-menu-item index="clientList">学生信息</el-menu-item>
+              <i class="el-icon-setting"></i>班级管理</template>
+            <el-menu-item index="studentList">学生信息</el-menu-item>
           </el-submenu>
           </el-submenu>
         </el-menu>
@@ -55,9 +55,8 @@
               </router-link>
               <span class="tags-li-icon" @click="closeTags(index)"><i class="el-icon-close"></i></span>
             </span>
-          
           <!-- 其他操作按钮 -->
-          <div class="tags-close-box">
+          <!-- <div class="tags-close-box">
             <el-dropdown @command="handleTags" >
               <el-button style=" height: 40px;">
                 <i class="el-icon-arrow-down el-icon--right"></i>
@@ -67,11 +66,9 @@
                 <el-dropdown-item command="all">关闭所有</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </div>
+          </div> -->
         </el-card>
-
         <router-view />
-
       </el-container>
     </el-container>
 
@@ -279,16 +276,4 @@
     color: #fff;
   }
 
-  .tags-close-box {
-    
-    position: absolute;
-    right: 11px;
-    top: 50px;
-    box-sizing: border-box;
-    padding-top: 15px;
-    text-align: center;
- 
-   
-
-  }
 </style>

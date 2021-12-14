@@ -88,7 +88,7 @@
 
 <script>
     export default {
-        name: 'clientList',
+        name: 'studentList',
         data() {
             return {
                 input: "",

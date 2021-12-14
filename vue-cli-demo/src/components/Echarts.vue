@@ -16,10 +16,6 @@
                 
             }
         },
-        created() {
-            
-        },
-       
         mounted() {
             this.drawLineOne();
             this.drawLineTwo();

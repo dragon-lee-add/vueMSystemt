@@ -8,7 +8,7 @@ const Echarts = () => import('@/components/Echarts');
 const Login = () => import('@/components/Login');
 const Register = () => import('@/components/Register');
 const DataAnalysis = () => import('@/components/DataAnalysis');
-const clientList = () => import('@/components/client/clientList');
+const studentList = () => import('@/components/student/studentList');
 Vue.use(Router)
 
 const router = new Router({
@@ -41,9 +41,9 @@ const router = new Router({
           component: DataAnalysis,
         },
         {
-          path: '/clientList',
-          name: 'clientList',
-          component: clientList,
+          path: '/studentList',
+          name: 'studentList',
+          component: studentList,
         },
       ]
     },

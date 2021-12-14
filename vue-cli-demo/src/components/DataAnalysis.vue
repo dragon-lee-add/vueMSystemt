@@ -11,7 +11,6 @@
 
 <script>
     import * as echarts from 'echarts';
-
     export default {
         name: 'DataAnalysis',
         data() {
@@ -204,9 +203,6 @@
         width: 30%;
         height: 100%;
         margin: 50px 10px 5px 10px;
-        background-color: #e7e5e1;
-        box-shadow: 10px 10px 5px #8d8989;
-        border-radius: 5%;
         display: inline-block;
     }
 

@@ -1,32 +1,41 @@
 <template>
-  <div class="login">
-    <!--左侧-->
-    <div class="left">
-      <el-image :src="url"></el-image>
-    </div>
-    <!--分界线-->
-    <el-divider direction="vertical"></el-divider>
-    <!--右侧-->
-    <div class="right">
-      <h3>登&nbsp;&nbsp;&nbsp;录</h3>
-      <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
-        <el-form-item label="账 号" prop="userId">
-          <el-input type="text" v-model="loginForm.userId" autocomplete="off" placeholder="学号/电话"></el-input>
-        </el-form-item>
-        <el-form-item label="密 码" prop="passWord">
-          <el-input type="password" v-model="loginForm.passWord" autocomplete="off" placeholder="默认身份证后六位"></el-input>
-        </el-form-item>
-        <el-form-item prop="rememberPwd">
-          <div class="remberBox">
-            <el-checkbox v-model="loginForm.remember" />
-            记住密码
-          </div>
-        </el-form-item>
-        <el-form-item class="box">
-          <el-button type="primary" @click="submitForm('loginForm')" size="small ">登录</el-button>
-          <el-button type="primary" @click="registerBtn()" size="small">注册</el-button>
-        </el-form-item>
-      </el-form>
+  <div>
+    <!--背景图片-->
+    <img :src="image" class="background"></img>
+    <!--中间登录框-->
+    <div class="content">
+      <div class="login">
+        <!--左侧-->
+        <div class="left">
+          <el-image :src="url"></el-image>
+        </div>
+        <!--分界线-->
+        <el-divider direction="vertical">ssdss</el-divider>
+        <!--右侧-->
+        <div class="right">
+          <h3>用户登录</h3>
+          <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px"
+            class="demo-loginForm">
+            <el-form-item label="账 号" prop="userId">
+              <el-input type="text" v-model="loginForm.userId" autocomplete="off" placeholder="学号/电话"></el-input>
+            </el-form-item>
+            <el-form-item label="密 码" prop="passWord">
+              <el-input type="password" v-model="loginForm.passWord" autocomplete="off" placeholder="默认身份证后六位">
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="rememberPwd">
+              <div class="remberBox">
+                <el-checkbox v-model="loginForm.remember" />
+                记住密码
+              </div>
+            </el-form-item>
+            <el-form-item class="box">
+              <el-button type="primary" @click="submitForm('loginForm')" size="small ">登录</el-button>
+              <el-button type="primary" @click="registerBtn()" size="small">注册</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +47,7 @@
     data() {
       return {
         url: 'http://localhost:8888/image/logo.jfif',
+        image: 'http://localhost:8888/image/background.jpeg',
         loginForm: {
           userId: '',
           passWord: '',
@@ -55,12 +65,6 @@
 
         },
       };
-    },
-    components: {
-
-    },
-    mounted() {
-
     },
     created() {
       let account = sessionStorage.getItem("userId")
@@ -140,6 +144,14 @@
     text-align: center;
   }
 
+  .background {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    position: fixed;
+    z-index: -1;
+  }
+
   .el-image {
     width: 100px;
     height: 100px;
@@ -148,6 +160,14 @@
     margin-top: -50px;
     margin-left: 8px;
     border-radius: 45px;
+  }
+
+  .content {
+    height: 350px;
+    width: 100%;
+    background: rgba(171, 175, 177, 0.3);
+    position: absolute;
+    top: 25%;
   }
 
   .login {
@@ -162,8 +182,8 @@
     width: 450px;
     border-radius: 15px;
     padding: 3px 3px;
-    box-shadow: 5px 5px 5px #e2dede;
-    background-color: rgb(169, 243, 243);
+    box-shadow: 5px 5px 5px #aeccee;
+    background-color: rgb(246, 250, 250);
   }
 
 
