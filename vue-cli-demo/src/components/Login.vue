@@ -46,7 +46,7 @@
     name: 'Login',
     data() {
       return {
-        url: 'http://localhost:8888/image/logo.jfif',
+        url: 'http://localhost:8888/image/image.jpg',
         image: 'http://localhost:8888/image/background.jpeg',
         loginForm: {
           userId: '',
