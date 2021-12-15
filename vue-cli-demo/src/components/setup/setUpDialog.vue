@@ -79,21 +79,17 @@
                                 this.dialogVisible = false;
                                 this.$router.push('/')
                             })
-
                         } else {
-
                             this.$message({
                                 showClose: true,
                                 message: '初始密码有误',
                                 type: 'warning'
                             });
                         }
-
                     } else {
                         return false;
                     }
                 });
-
             },
             show() {
                 this.dialogVisible = true;
