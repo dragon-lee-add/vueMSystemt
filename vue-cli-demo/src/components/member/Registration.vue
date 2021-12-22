@@ -50,14 +50,13 @@
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="状态" prop="status">
-                            <el-select v-model="form.status" placeholder="请选择状态">
-                                <el-option label="未审核" value="1"></el-option>
-                                <el-option label="审核通过" value="2"></el-option>
+                            <el-select v-model="form.status" placeholder="请选择状态" @change="statusTypes">
+                                <el-option v-for="item in statusList" :key="item.id" :label="item.label"
+                                    :value="item.id"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
-
 
                 <el-row>
                     <el-col :span="24">
@@ -86,8 +85,12 @@
                     memberNum: "",
                     memberAddr: "",
                     date: '',
-                    status: ""
+                    status: "",
                 },
+                statusList: [{
+                    id: 1,
+                    label: "审核"
+                }],
                 rules: {
                     memberName: [
                         { required: true, message: '请输入姓名', trigger: 'blur' },
@@ -115,9 +118,16 @@
             }
         },
         created() {
-
+            
         },
         methods: {
+            statusTypes(value) {
+                this.statusList.forEach(item => {
+                    if (item.id === value) {
+                        this.form.status = item.label
+                    }
+                })
+            },
             addMember(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
@@ -129,7 +139,7 @@
                             memberNum: this.form.memberNum,
                             memberAddr: this.form.memberAddr,
                             date: this.form.date,
-                            staus: this.form.status
+                            status: this.form.status
                         }).then(res => {
                             this.dialogVisible = false
                             this.$parent.getList();
