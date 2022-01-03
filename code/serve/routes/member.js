@@ -42,5 +42,16 @@ router.get('/Delmember', function (req, res) {
     }
   })
 });
-
+//查询
+router.post('/selectAll', (req, res)=> {
+  let  {memberName,phone,memberNum,date}=req.body;
+  const sqlStr=`select * from member where  memberName='${memberName}' or phone='${phone}' or memberNum='${memberNum}' or date='${date}'`
+  connection.query(sqlStr,(err,data) =>{
+          if(err){
+            throw err;
+          }else{
+            res.send(data)
+          }
+  })
+});
 module.exports = router;

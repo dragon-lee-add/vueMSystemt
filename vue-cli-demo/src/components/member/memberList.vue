@@ -1,36 +1,31 @@
 <template>
     <div id="content">
         <el-card class="box-card">
-            <el-form :inline="true" label-width="128px" class="form">
+            <el-form :inline="true" label-width="128px" class="form" ref="form" :model="form">
                 <el-col :span="8">
-                    <el-form-item label="会员号" prop="">
-                        <el-input v-model="input" placeholder="请输入内容"></el-input>
+                    <el-form-item label="会员号" prop="memberNum">
+                        <el-input v-model="form.memberNum" placeholder="请输入内容"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
-                    <el-form-item label="姓名" prop="">
-                        <el-input></el-input>
+                    <el-form-item label="姓名" prop="memberName">
+                        <el-input v-model="form.memberName"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
-                    <el-form-item label="电话" prop="">
-                        <el-input></el-input>
+                    <el-form-item label="电话" prop="phone">
+                        <el-input v-model="form.phone"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-form-item label="注册日期">
-                    <el-col :span="10">
-                        <el-date-picker type="date" placeholder="选择日期" style="width: 100%;" format="yyyy-MM-dd"
-                            value-format="yyyy-MM-dd"></el-date-picker>
-                    </el-col>
-                    <el-col class="line" :span="2" style="text-align: center">至</el-col>
-                    <el-col :span="10">
-                        <el-date-picker type="date" placeholder="选择日期" style="width: 100%;" format="yyyy-MM-dd"
-                            value-format="yyyy-MM-dd"></el-date-picker>
-                    </el-col>
-                </el-form-item>
+                <el-col :span="12">
+                    <el-form-item label="注册日期" prop="date">
+                        <el-date-picker type="date" v-model="form.date" placeholder="选择日期" style="width: 100%;"
+                            format="yyyy-MM-dd" value-format="yyyy-MM-dd"></el-date-picker>
+                    </el-form-item>
+                </el-col>
                 <el-form-item>
-                    <el-button type="cyan" icon="el-icon-search" size="mini">搜索</el-button>
-                    <el-button icon="el-icon-refresh" size="mini">重置</el-button>
+                    <el-button type="cyan" icon="el-icon-search" @click="selAll()" size="mini">搜索</el-button>
+                    <el-button icon="el-icon-refresh" size="mini" @click="resetForm('form')">重置</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -101,7 +96,12 @@
         },
         data() {
             return {
-                input: "",
+                form: {
+                    memberName: '',
+                    phone: "",
+                    memberNum: "",
+                    date: '',
+                },
                 currentPage: 1,
                 pageSize: 4,
                 pageList: [],//分页数组
@@ -111,7 +111,6 @@
         },
         created() {
             this.getList()
-
         },
         mounted() {
 
@@ -141,8 +140,6 @@
                         message: '已取消删除'
                     });
                 });
-
-
             },
             Registration() {
                 this.$refs.RegistrationChild.dialogVisible = true
@@ -153,6 +150,22 @@
                     this.currentChangePage(this.tableData, 1);
 
                 })
+            },
+            //查询
+            selAll() {
+                this.axios.post("/api/member/selectAll", {
+                    memberName: this.form.memberName,
+                    phone: this.form.phone,
+                    memberNum: this.form.memberNum,
+                    date: this.form.date
+                }).then((res) => {
+                    this.tableData = res.data;
+                    this.currentChangePage(this.tableData, 1);
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+                this.getList()
             },
             //分页
             handleSizeChange: function (pageSize) { // 每页条数切换
