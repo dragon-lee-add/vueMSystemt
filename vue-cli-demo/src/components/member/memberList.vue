@@ -74,7 +74,7 @@
                     <!--分页-->
                     <diV style="float: right;margin: 10px;">
                         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                            :current-page="currentPage" :page-size="pageSize" :page-sizes="[10, 20, 30, 40]"
+                            :current-page="DefaultcurrentPage" :page-sizes="[10, 20, 30, 40]" :page-size="10"
                             layout="total, sizes, prev, pager, next, jumper" :total="this.tableData.length">
                         </el-pagination>
                     </diV>
@@ -102,18 +102,18 @@
                     memberNum: "",
                     date: '',
                 },
-                currentPage: 1,
-                pageSize: 4,
+                DefaultcurrentPage: 1,
+                pageSize: 10,
                 pageList: [],//分页数组
                 tableData: [],
                 ids: []
             }
         },
         created() {
-            this.getList()
+            
         },
         mounted() {
-
+            this.getList()
         },
         methods: {
             delMember(row) {
@@ -170,10 +170,10 @@
             //分页
             handleSizeChange: function (pageSize) { // 每页条数切换
                 this.pageSize = pageSize
-                this.handleCurrentChange1(this.currentPage1);
+                this.handleCurrentChange(this.DefaultcurrentPage);
             },
             handleCurrentChange: function (currentPage) {//页码切换
-                this.currentPage1 = currentPage
+                this.DefaultcurrentPage = currentPage
                 this.currentChangePage(this.tableData, currentPage)
             },
             currentChangePage(list, currentPage) {
