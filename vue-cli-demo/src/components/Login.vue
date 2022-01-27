@@ -10,7 +10,7 @@
           <el-image :src="url"></el-image>
         </div>
         <!--分界线-->
-        <el-divider direction="vertical">ssdss</el-divider>
+        <el-divider direction="vertical"></el-divider>
         <!--右侧-->
         <div class="right">
           <h3>管理员登录</h3>
@@ -28,6 +28,9 @@
                 <el-checkbox v-model="loginForm.remember" />
                 记住密码
               </div>
+              <div class="qucikLogin" style="margin-top: 1.5px;">
+                <el-link type="primary"  :underline="underline" @click="qucikLogin()">快速登录</el-link>
+              </div>
             </el-form-item>
             <el-form-item class="box">
               <el-button type="primary" @click="submitForm('loginForm')" size="small ">登录</el-button>
@@ -37,15 +40,22 @@
         </div>
       </div>
     </div>
+
+
+    <qrCode ref="qrCode"></qrCode>
   </div>
 </template>
 
 <script>
-
+  import qrCode from '../components/qrcode/qrCode'
   export default {
     name: 'Login',
+    components: {
+      qrCode
+    },
     data() {
       return {
+        underline: false,
         url: 'http://localhost:8888/image/image.jpg',
         image: 'http://localhost:8888/image/background.jpeg',
         loginForm: {
@@ -77,6 +87,9 @@
       }
     },
     methods: {
+      qucikLogin(){
+        this.$refs.qrCode.show();
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -198,6 +211,7 @@
 
   .remberBox {
     float: left;
+    margin-right: 12px;
   }
 
   .right {
