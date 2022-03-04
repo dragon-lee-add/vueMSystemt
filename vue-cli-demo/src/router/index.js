@@ -9,6 +9,7 @@ const Login = () => import('@/components/Login');
 const Register = () => import('@/components/Register');
 const DataAnalysis = () => import('@/components/DataAnalysis');
 const memberList = () => import('@/components/member/memberList');
+const Index = () => import('@/components/webview/Index');
 Vue.use(Router)
 
 const router = new Router({
@@ -22,6 +23,11 @@ const router = new Router({
       path: '/Register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/Index',
+      name: 'Index',
+      component: Index
     },
     {
       path: '/Home',

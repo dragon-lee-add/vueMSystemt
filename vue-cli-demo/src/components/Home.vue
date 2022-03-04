@@ -3,7 +3,7 @@
     <el-container style="height: 500px; border: 1px solid #eee">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu default-active="" router background-color="#545c64" text-color="#fff">
-          <el-menu-item index="Echarts" style="background:#333; font-size:22px">
+          <el-menu-item index="Index" style="background:#333; font-size:22px">
             <i class="el-icon-s-help"></i>
             会员管理系统
           </el-menu-item>
