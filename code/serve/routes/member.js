@@ -7,6 +7,19 @@ const connection = require('./conn')
 //连接数据
 connection.connect(() => { })
 
+
+/*获取楼房列表* */
+router.post('/listHotel', (req, res) => {
+  const sqlStr = 'select * from room'
+  connection.query(sqlStr, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(data)
+    }
+  })
+});
+
 /*获取列表*/
 router.post('/list', (req, res) => {
   const sqlStr = 'select * from member'
